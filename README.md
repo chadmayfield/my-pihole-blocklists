@@ -1,19 +1,17 @@
 # pihole-blocklists
 
-**DISCLAIMER**: This is a work in progress, and is being actively developed (for now).
-
 Create custom [pi-hole](https://pi-hole.net/) [blocklists](https://github.com/pi-hole/pi-hole/wiki/Customising-sources-for-ad-lists#block-more-than-advertisements). To block unwanted traffic to a network.
 
 Dashboard with difference blocklists installed;
 
 | Running with default ruleset | Top 1m (Light List) | All (Heavy List) |
 | :--------------------------: | :------------------:| :---------------:|
-| [default](http://i.imgur.com/Nq9vCM7.png) | [light](http://i.imgur.com/vA3YWjp.png) | [heavy](http://i.imgur.com/7e8xpUl.png) |
+| ![default](http://i.imgur.com/Nq9vCM7.png) | ![light](http://i.imgur.com/vA3YWjp.png) | ![heavy](http://i.imgur.com/7e8xpUl.png) |
 
 Currently supported lists;
-1. porn (via `create_blocklist_porn.pl` which creates two lists)
-..* light list: `pi_blocklist_porn_top1m.list` (~21k domains). This list is a correlated list to only block porn sites that appear on Alex'a top 1m site list.
-..* heavy list: `pi_blocklist_porn_all.list` (~2m domains). This list is a slightly edited list from Université Toulouse 1 Capitole.  _NOTE: Use caution when using this list with embedded computers._
+1. porn (via `create_blocklist_porn.pl` which creates two lists)<br />
+... **light list**: `pi_blocklist_porn_top1m.list` (~21k domains). This list is a correlated list to only block porn sites that appear on Alex'a top 1m site list.<br />
+... **heavy list**: `pi_blocklist_porn_all.list` (~2m domains). This list is a slightly edited list from Université Toulouse 1 Capitole.  _NOTE: Use caution when using this list with embedded computers._<br />
 2. more coming soon...
 
 ## Requirements
@@ -23,9 +21,9 @@ Currently supported lists;
 ## Installation
 1. SSH to deployed pi-hole
 2. Copy adlists.default to adlists.list `sudo cp /etc/pihole/adlists.default /etc/pihole/adlists.list`
-3. Edit `sudo vi /etc/pihole/adlists.list` to add one of the following lists;
-..*. **Light**: `https://raw.githubusercontent.com/chadmayfield/pihole-blocklists/master/lists/pi_blocklist_porn_top1m.list`
-..*. **Heavy** `https://raw.githubusercontent.com/chadmayfield/pihole-blocklists/master/lists/pi_blocklist_porn_all.list`
+3. Edit `sudo vi /etc/pihole/adlists.list` to add one of the following lists;<br />
+... **Light**: `https://raw.githubusercontent.com/chadmayfield/pihole-blocklists/master/lists/pi_blocklist_porn_top1m.list`<br />
+... **Heavy** `https://raw.githubusercontent.com/chadmayfield/pihole-blocklists/master/lists/pi_blocklist_porn_all.list`<br />
 4. Run `pihole -g` to update all lists
 ```
 pi¾pi-hole:´ $ pihole -g
@@ -97,6 +95,8 @@ Heavy blocklist created: pi_blocklist_porn_all.list (1980211 lines)
 *******************************************************************
 ```
 
+**DISCLAIMER**: This is a work in progress, and is being actively developed (for now).
+
 ## TODO
 - [ ] Cleanup the code! (most of this was written as PoC)
 - [ ] Log output from script to file rather than STDOUT
@@ -105,3 +105,4 @@ Heavy blocklist created: pi_blocklist_porn_all.list (1980211 lines)
 - [ ] Add installation script for automated install
 - [ ] Add additional lists to combine into one mega list
 - [ ] Possibly generizie script to accept any list
+- [ ] Add instructions to host the list on the pi-host itself
