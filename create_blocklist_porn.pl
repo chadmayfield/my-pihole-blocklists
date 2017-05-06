@@ -8,73 +8,150 @@
 use strict;
 use warnings;
 
-use Archive::Tar;
+use LWP::Simple;
 use File::Fetch;
 use File::Slurp;
+use Archive::Tar;
+use Archive::Zip;
+use Array::Utils qw(:all);
 
-# download list from Université Toulouse 1 Capitole, there isn't an update date
-# on this site (http://dsi.ut-capitole.fr/blacklists/index_en.php) so we hope 
-# that it's recent, if not we can always add more in the future
-my $url = 'ftp://ftp.ut-capitole.fr/pub/reseau/cache/squidguard_contrib/adult.tar.gz';
 
-# grab the filename
-my $filename = substr $url, rindex($url, '/') + 1; 
+# we'll save the lists in these two files
+my $outfile = "pi_blocklist_porn_top1m.list";
+my $allfile = "pi_blocklist_porn_all.list";
 
-if (-e $filename) {
-    print "The file $filename exists, deleting it before download...";
-    unlink $filename or die "ERROR: Unable to delete $filename!\n";
-    print "done.\n";
+my $url1 = "http://s3.amazonaws.com/alexa-static/top-1m.csv.zip";
+my $url2 = "ftp://ftp.ut-capitole.fr/pub/reseau/cache/squidguard_contrib/adult.tar.gz";
+
+my @files;
+my @matches;
+my @compare;
+
+print "beginning downloads\n";
+
+# download each url
+foreach ($url1, $url2) {
+    my $url = $_;
+
+    # get filename
+    my $ff = File::Fetch->new(uri => $url);
+    my $filename = $ff->file;
+
+    # add filename to array for later
+    push @files, $filename;
+
+    my $response = getstore($url, $filename);
+   die "ERROR: Couldn't download $filename!" unless defined $response;
+
+    print "download complete: $filename\n";
 }
 
-# download
-print "Starting download of $filename...";
-my $ff = File::Fetch->new(uri => $url);
-my $file = $ff->fetch() or die $ff->error;
-print "done.\n";
+print "extracting files\n";
 
-# extract tarball that was downloaded
-print "Extracting $filename...";
+# etract each file
+foreach (@files) {
+    my $filename = $_;
+    my $suffix = ( split /\./, $filename )[-1];
 
-my $tar = Archive::Tar->new;
-$tar->read($filename);
-$tar->extract() or die "ERROR: Unable to extract $filename!\n";
+    print "extracting file: $filename\n";
 
-print "done.\n";
+    if ( $suffix =~ "gz" ) {
+        my $tar = Archive::Tar->new;
+        $tar->read($filename);
+        $tar->extract() or die "ERROR: Unable to extract $filename!\n";
 
-# create our own custom block list by pruning IP's & bad lines
-my $outfile = 'pi_blocklist_porn.list';
+        # we can assume the file was adult.tar.gz for now
+        if (-e "adult/domains") {
+            print "  loading domains from $filename\n";
 
-if (-e $outfile) {
-    print "Found existing $outfile, deleting it before proceeding...";
-    unlink $outfile or die "ERROR: Unable to delete $outfile!\n";
-    print "deleted.\n"
+            # read the file into an array
+            my @adult = read_file('adult/domains');
+
+            # get rid of any IP's or non-domain words
+            my $regexp = '^(xxx|porn|adult|sex|\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$';
+
+            open ALLFILE, ">", $allfile or die $!;
+
+            # write all unmatched lines into tmpfile & load it into array
+            for (@adult){
+                my $tmpline = $_;
+                next if ($_ =~ /$regexp/);
+                # write to file
+                print ALLFILE $tmpline;
+                # load into array as well
+                push @compare, $_;
+            }
+
+            close ALLFILE;
+
+            print "  loaded successfully\n";
+            
+            # cleanup
+            unlink $filename;
+            unlink(glob('adult/*'));
+            rmdir 'adult';
+        }
+    } elsif ( $suffix =~ "zip" ) {
+        my $zip = Archive::Zip->new();
+        my $zipname = $filename;
+        my $status = $zip->read($zipname);
+        die "ERROR: Can't read $zipname!\n" if $status != 0;
+
+        # extract
+        $zip->extractTree();
+
+        # we can assume the alexa data we get is called top-1m.csv
+        if (-e "top-1m.csv") {
+            print "  loading alexa top-1m domains\n";
+            $filename = "top-1m.csv";
+        
+            open my $fh1, '<', $filename or die "Cannot open $filename: $!";
+
+            # load all domains into array
+            while ( my $line = <$fh1> ) {
+                my @ln = split ',', $line;
+                push @matches, "$ln[1]";
+            }
+
+            close($fh1);
+
+            print "  loaded successfully\n";
+
+            # cleanup (trim extension to glob unlink)
+            $filename = substr $filename, 0, rindex( $filename, q{.} );
+            unlink(glob("$filename*"));
+        }
+    } else {
+        die "ERROR: Unknown filetype!\n";
+    }
 }
 
-open my $output, '>', $outfile or die "ERROR: Unable to write $outfile ($!)";
+print "comparing lists for commonality\n";
 
-# read the domains list
-my @array = read_file('adult/domains');
+# get array intersections
+my @isect = intersect(@compare, @matches);
 
-print "Removing bad lines from 'adult/domains'...";
+open OUTFILE, ">", $outfile or die $!;
+print OUTFILE @isect;
+close OUTFILE;
 
-# remove non-domains and any IP addresses
-my $regexp = '^(xxx|porn|adult|sex|\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$';
+print "counting lines...";
+# get the line count for each line
+my $count1;
+open(FILE1, "< $allfile") or die "can't open $allfile: $!";
+$count1++ while <FILE1>;
+close FILE1;
 
-for (@array){
-    next if ($_ =~ /$regexp/);     
-        print $output $_;
-}
-print "done.\n";
+# get the line count for each line
+my $count2;
+open(FILE2, "< $outfile") or die "can't open $outfile: $!";
+$count2++ while <FILE2>;
+close FILE2;
+print "done\n";
 
-# TODO: add additional domains to blocklist
-
-print "*****************************************\n";
-print "Blocklist created: $outfile\n";
-print "*****************************************\n";
-
-# cleanup files
-unlink($filename);
-unlink(glob('adult/*'));
-    rmdir 'adult';
+print "*******************************************************************\n";
+print "Light blocklist created: $outfile ($count2 lines)\n";
+print "Heavy blocklist created: $allfile ($count1 lines)\n";
+print "*******************************************************************\n";
 
 #EOF
