@@ -3,13 +3,13 @@
 Create custom [pi-hole](https://pi-hole.net/) [blocklists](https://github.com/pi-hole/pi-hole/wiki/Customising-sources-for-ad-lists#block-more-than-advertisements). To block unwanted traffic to a network.
 
 ## Screenshots
-Dashboard with difference blocklists installed;
+Pi-hol dashboard with the default, light, and heavy porn blocklists installed;
 
 | Running with default ruleset | Top 1m (Light List) | All (Heavy List) |
 | :--------------------------: | :------------------:| :---------------:|
 | ![default blocklist](http://i.imgur.com/Nq9vCM7.png) | ![light blocklist](http://i.imgur.com/vA3YWjp.png) | ![heavy blocklist](http://i.imgur.com/7e8xpUl.png) |
 
-And the affect;
+And the affect of having the porn list installed;
 
 ![Site Blocked!](http://i.imgur.com/uzBFPxI.png)
 
@@ -113,3 +113,6 @@ Heavy blocklist created: pi_blocklist_porn_all.list (1980211 lines)
 - [ ] Add additional lists to combine into one mega list
 - [ ] Possibly generizie script to accept any list
 - [ ] Add instructions to host the list on the pi-host itself
+- [ ] Add the Cisco Umbrella OpenDNS Top 1 Million list
+- [ ] Add the Majestic Million list
+- [ ] Add the Stavoo Top 1 Million list
