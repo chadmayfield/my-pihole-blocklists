@@ -1,9 +1,9 @@
 # pihole-blocklists
 
-Create custom [pi-hole](https://pi-hole.net/) [blocklists](https://github.com/pi-hole/pi-hole/wiki/Customising-sources-for-ad-lists#block-more-than-advertisements). To block unwanted traffic to a network.
+Create custom [pi-hole](https://pi-hole.net/) [blocklists](https://github.com/pi-hole/pi-hole/wiki/Customising-sources-for-ad-lists#block-more-than-advertisements) to block unwanted traffic to a network.
 
 ## Screenshots
-Pi-hol dashboard with the default, light, and heavy porn blocklists installed;
+Pi-hole dashboard with the default, light, and heavy porn blocklists installed;
 
 | Running with default ruleset | Top 1m (Light List) | All (Heavy List) |
 | :--------------------------: | :------------------:| :---------------:|
