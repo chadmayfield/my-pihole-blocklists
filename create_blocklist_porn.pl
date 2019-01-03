@@ -133,6 +133,12 @@ my @isect = intersect(@compare, @matches);
 
 open OUTFILE, ">", $outfile or die $!;
 print OUTFILE @isect;
+
+# TODO: fix this temp hack to add subdomains, it's fugly!
+for my $i (@isect) {
+    print OUTFILE "www.${i}";
+}
+
 close OUTFILE;
 
 print "counting lines...";
