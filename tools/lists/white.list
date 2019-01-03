@@ -1,0 +1,195 @@
+### Ubiquiti iPhone Speetest App
+pro.ip-api.com
+### Google Maps
+clients4.google.com
+clients2.google.com
+### Youtube history
+s.youtube.com
+video-stats.l.google.com
+### Google Play
+android.clients.google.com
+### Google Chrome
+dl.google.com
+### Microsoft Office
+www.msftncsi.com
+outlook.office365.com
+products.office.com
+c.s-microsoft.com
+i.s-microsoft.com
+login.live.com
+officeclient.microsoft.com
+### Bitlocker recovery key
+g.live.com
+### Windows 10 Update
+settings-win.data.microsoft.com
+v10.vortex-win.data.microsoft.com
+v20.vortex-win.data.microsoft.com
+### Windows Defender
+wdcp.microsoft.com
+wdcpalt.microsoft.com
+tsfe.trafficshaping.dsp.mp.microsoft.com
+### Windows Store
+dl.delivery.mp.microsoft.com
+geo-prod.do.dsp.mp.microsoft.com
+displaycatalog.mp.microsoft.com
+### Xbox Live
+clientconfig.passport.net
+v10.events.data.microsoft.com
+xbox.ipv6.microsoft.com
+device.auth.xboxlive.com
+www.msftncsi.com
+title.mgt.xboxlive.com
+xsts.auth.xboxlive.com
+title.auth.xboxlive.com
+ctldl.windowsupdate.com
+attestation.xboxlive.com
+xboxexperiencesprod.experimentation.xboxlive.com
+xflight.xboxlive.com
+cert.mgt.xboxlive.com
+xkms.xboxlive.com
+def-vef.xboxlive.com
+notify.xboxlive.com
+help.ui.xboxlive.com
+licensing.xboxlive.com
+eds.xboxlive.com
+www.xboxlive.com
+v10.vortex-win.data.microsoft.com
+settings-win.data.microsoft.com
+### Skype
+s.gateway.messenger.live.com
+ui.skype.com
+pricelist.skype.com
+apps.skype.com
+m.hotmail.com
+s.gateway.messenger.live.com
+sa.symcb.com
+s1.symcb.com
+s2.symcb.com
+s3.symcb.com
+s4.symcb.com
+s5.symcb.com
+### Spotify
+spclient.wg.spotify.com
+spclient-wg.spotify.com
+apresolve.spotify.com
+mobile-ap.spotify.com
+upgrade.scdn.co
+market.spotify.com
+### Facebook
+creative.ak.fbcdn.net
+external-lhr0-1.xx.fbcdn.net
+external-lhr1-1.xx.fbcdn.net
+external-lhr10-1.xx.fbcdn.net
+external-lhr2-1.xx.fbcdn.net
+external-lhr3-1.xx.fbcdn.net
+external-lhr4-1.xx.fbcdn.net
+external-lhr5-1.xx.fbcdn.net
+external-lhr6-1.xx.fbcdn.net
+external-lhr7-1.xx.fbcdn.net
+external-lhr8-1.xx.fbcdn.net
+external-lhr9-1.xx.fbcdn.net
+fbcdn-creative-a.akamaihd.net
+scontent-lhr3-1.xx.fbcdn.net
+scontent.xx.fbcdn.net
+scontent.fgdl5-1.fna.fbcdn.net
+graph.facebook.com
+connect.facebook.com
+cdn.fbsbx.com
+### Plex
+plex.tv
+tvdb2.plex.tv
+pubsub.plex.bz
+proxy.plex.bz
+proxy02.pop.ord.plex.bz
+cpms.spop10.ams.plex.bz
+meta-db-worker02.pop.ric.plex.bz
+meta.plex.bz
+tvthemes.plexapp.com.cdn.cloudflare.net
+tvthemes.plexapp.com
+106c06cd218b007d-b1e8a1331f68446599e96a4b46a050f5.ams.plex.services
+meta.plex.tv
+cpms35.spop10.ams.plex.bz
+proxy.plex.tv
+metrics.plex.tv
+pubsub.plex.tv
+status.plex.tv
+www.plex.tv
+node.plexapp.com
+nine.plugins.plexapp.com
+staging.plex.tv
+app.plex.tv
+o1.email.plex.tv 
+o2.sg0.plex.tv
+dashboard.plex.tv
+gravatar.com
+thetvdb.com
+themoviedb.com
+### Sonarr
+services.sonarr.tv
+skyhook.sonarr.tv
+download.sonarr.tv
+apt.sonarr.tv
+forums.sonarr.tv
+### Hulu
+# https://www.reddit.com/r/pihole/comments/9esp0y/hulu_yes_another_one/
+doppler.hulu.com
+vortex.hulu.com
+ib4.hulu.com
+discover.hulu.com
+play.hulu.com
+hulu.hb.omtrdc.net
+http-v-darwin.hulustream.com
+ads-e-darwin.hulustream.com
+license.hulu.com
+manifest.hulustream.com
+ib.hulu.com
+ib1.hulu.com
+ib4.hulu.com
+ib2.hulu.com
+ib3.hulu.com
+http-e-darwin.hulustream.com
+home.hulu.com
+cws-hulu.conviva.com
+auth.hulu.com
+# https://discourse.pi-hole.net/t/whitelist-hulu-roku-app-fails-when-trying-to-play-advert/296
+#p.hulu.com
+#ads.hulu.com
+#a.dlqm.net
+#ads-a-darwin.hulu.com
+#ads-bid.l.doubleclick.net
+#ads-v-darwin.hulu.com
+#ads-v-darwin.hulu.com.c.footprint.net
+#amch.questionmarket.com
+#assets.huluim.com
+#bs.serving-sys.com
+#cdn.innovid.com
+#core.insightexpressai.com
+#dart.l.doubleclick.net
+#data.agkn.com
+#ds.serving-sys.com
+#dts.innovid.com
+#googleads4.g.doubleclick.net
+#hulu-darwin.fms.c.footprint.net
+#hulu-pubnet.telemetryaudit.com
+#p.hulu.com
+#pagead.l.doubleclick.net
+#pagead.l.doubleclick.net
+#s.innovid.com
+#sb.scorecardresearch.com
+#secure-us.imrworldwide.com
+#stats.l.doubleclick.net
+#t.hulu.com
+#t2.hulu.com
+#tapestry.tapad.com
+#telemetry.huluad.com
+#ts.vindicosuite.com
+#view.atdmt.com.nsatc.net
+#vindicoasset.edgesuite.net
+### Dropbox
+dl.dropboxusercontent.com
+ns1.dropbox.com
+ns2.dropbox.com
+### Apple Music
+itunes.apple.com
+### Apple ID
+appleid.apple.com

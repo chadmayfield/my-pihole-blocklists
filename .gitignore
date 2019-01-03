@@ -1,3 +1,5 @@
+tools/logs/*.log
+
 # vim temp history
 # http://stackoverflow.com/a/9850662
 .netrwhist
