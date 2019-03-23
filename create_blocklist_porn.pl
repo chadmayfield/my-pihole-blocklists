@@ -17,8 +17,8 @@ use Array::Utils qw(:all);
 
 
 # we'll save the lists in these two files
-my $outfile = "pi_blocklist_porn_top1m.list";
-my $allfile = "pi_blocklist_porn_all.list";
+my $outfile = "lists/pi_blocklist_porn_top1m.list";
+my $allfile = "lists/pi_blocklist_porn_all.list";
 
 # whitelist valid domains that may make it though from upstream
 my $whitelistfile = "white.list";
@@ -51,7 +51,7 @@ foreach ($url1, $url2) {
 
 print "extracting files\n";
 
-# etract each file
+# extract each file
 foreach (@files) {
     my $filename = $_;
     my $suffix = ( split /\./, $filename )[-1];
