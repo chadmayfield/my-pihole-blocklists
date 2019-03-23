@@ -20,12 +20,15 @@ use Array::Utils qw(:all);
 my $outfile = "pi_blocklist_porn_top1m.list";
 my $allfile = "pi_blocklist_porn_all.list";
 
+# whitelist valid domains that may make it though from upstream
+my $whitelistfile = "white.list";
+
 my $url1 = "http://s3.amazonaws.com/alexa-static/top-1m.csv.zip";
 my $url2 = "ftp://ftp.ut-capitole.fr/pub/reseau/cache/squidguard_contrib/adult.tar.gz";
 
 my @files;
 my @matches;
-my @compare;
+my @valid;
 
 print "beginning downloads\n";
 
@@ -67,19 +70,23 @@ foreach (@files) {
             # read the file into an array
             my @adult = read_file('adult/domains');
 
+            # remove whitelisted domains
+            my @whitelist = read_file($whitelistfile);
+            my @compare = array_minus(@adult, @whitelist);
+
             # get rid of any IP's or non-domain words
             my $regexp = '^(xxx|porn|adult|sex|\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$';
 
             open ALLFILE, ">", $allfile or die $!;
 
             # write all unmatched lines into tmpfile & load it into array
-            for (@adult){
+            for (@compare){
                 my $tmpline = $_;
                 next if ($_ =~ /$regexp/);
                 # write to file
                 print ALLFILE $tmpline;
                 # load into array as well
-                push @compare, $_;
+                push @valid, $_;
             }
 
             close ALLFILE;
@@ -129,7 +136,7 @@ foreach (@files) {
 print "comparing lists for commonality\n";
 
 # get array intersections
-my @isect = intersect(@compare, @matches);
+my @isect = intersect(@valid, @matches);
 
 open OUTFILE, ">", $outfile or die $!;
 print OUTFILE @isect;
