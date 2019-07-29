@@ -88,8 +88,8 @@ foreach (@files) {
             my @whitelist = read_file($whitelistfile);
             my @compare = array_minus(@adult, @whitelist);
 
-            # get rid of any IP's or non-domain words
-            my $regexp = '^(xxx|porn|adult|sex|\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$';
+            # get rid of any IPv4 IP's or invalid domains
+            my $regexp = '^\-|(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$';
 
             open LIST, ">", $all_list or die $!;
 
