@@ -14,6 +14,8 @@ use Array::Utils qw(:all);
 use File::Copy;
 use File::Fetch;
 use File::Slurp;
+use File::Basename;
+use File::Path qw/make_path/;
 use LWP::Simple;
 use POSIX qw(strftime);
 
@@ -57,7 +59,9 @@ foreach ($url1, $url2) {
 
 # create dir for archive files
 unless ( -d "$archive_dir" ) {
-    mkdir "$archive_dir",0755 or die $!;
+    my $dir = dirname($archive_dir);
+    make_path($dir);
+    open my $fh, '>', $archive_dir or die "Ouch: $!\n";
 }
 
 print "extracting files\n";
