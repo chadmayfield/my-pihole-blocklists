@@ -26,7 +26,7 @@ Currently supported lists;
 
 ## Requirements
 * Perl
-* Array::Utils (install via `sudo perl -MCPAN -e 'install Array::Utils'`)
+* Array::Utils (install via `sudo perl -MCPAN -e 'install Array::Utils'` aslo you may needed to use `export PERL5LIB=` after installing Array::Utils to add path to the library)
 
 ## Installation
 1. SSH to deployed pi-hole
