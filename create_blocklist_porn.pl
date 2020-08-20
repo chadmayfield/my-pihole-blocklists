@@ -28,8 +28,8 @@ my $archive_dir = "lists/archives/upstream/$today";
 my $top1m_list = "lists/pi_blocklist_porn_top1m.list";
 my $all_list = "lists/pi_blocklist_porn_all.list";
 
-# whitelist valid domains that may make it though from upstream
-my $whitelistfile = "white.list";
+# allow valid domains that may make it though from upstream
+my $whitelistfile = "allow.list";
 
 my $url1 = "http://s3.amazonaws.com/alexa-static/top-1m.csv.zip";
 my $url2 = "ftp://ftp.ut-capitole.fr/pub/reseau/cache/squidguard_contrib/adult.tar.gz";
